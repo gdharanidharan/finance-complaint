@@ -6,7 +6,7 @@ class ModelEvaluationArtifactData:
 
     def __init__(self):
         self.client = MongodbClient()
-        self.collection_name = "model_eval_artifact"
+        self.collection_name = "model_evaluation_artifact"
         self.collection = self.client.database[self.collection_name]
 
     def save_eval_artifact(self, model_eval_artifact: ModelEvaluationArtifact):
