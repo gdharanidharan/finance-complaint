@@ -34,7 +34,7 @@ with DAG(
     # [START extract_function]
 
 
-    from finance_complaint.pipeline.training import  TrainingPipeline
+    from finance_complaint.pipeline.training import TrainingPipeline   
     from finance_complaint.config.pipeline.training import FinanceConfig
     training_pipeline= TrainingPipeline(FinanceConfig())
 
@@ -99,7 +99,7 @@ with DAG(
         model_evaluation_artifact = training_pipeline.start_model_evaluation(data_validation_artifact=data_validation_artifact,
                                                                     model_trainer_artifact=model_trainer_artifact)
 
-    
+
         ti.xcom_push('model_evaluation_artifact', model_evaluation_artifact.to_dict())
 
     def push_model(**kwargs):

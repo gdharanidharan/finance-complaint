@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 from typing import List
 
 # Declaring variables for setup functions
-PROJECT_NAME = "finance-complaint"
-VERSION = "0.0.4"
-AUTHOR = "Avnish Yadav"
+PROJECT_NAME = "finance_complaint"
+VERSION = "0.0.0"
+AUTHOR = "Dharanidharan"
 DESRCIPTION = "This is a sample for industry ready solution"
 
 REQUIREMENT_FILE_NAME = "requirements.txt"
