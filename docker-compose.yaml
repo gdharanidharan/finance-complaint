@@ -12,7 +12,7 @@ volumes:
 services:
   application:
     build: .
-    #image: ${IMAGE_NAME}
+    image: ${IMAGE_NAME}
     container_name: finance-complaint
     ports:
       - "8080:8080"
