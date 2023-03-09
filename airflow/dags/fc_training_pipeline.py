@@ -24,7 +24,7 @@ with DAG(
     schedule_interval="@weekly",
     start_date=pendulum.datetime(2022, 11, 20, tz="UTC"),
     catchup=False,
-    tags=['example'],
+    tags=['example']
 ) as dag:
     # [END instantiate_dag]
     # [START documentation]
@@ -34,7 +34,7 @@ with DAG(
     # [START extract_function]
 
 
-    from finance_complaint.pipeline.training import TrainingPipeline   
+    from finance_complaint.pipeline.training import  TrainingPipeline
     from finance_complaint.config.pipeline.training import FinanceConfig
     training_pipeline= TrainingPipeline(FinanceConfig())
 
@@ -98,8 +98,6 @@ with DAG(
 
         model_evaluation_artifact = training_pipeline.start_model_evaluation(data_validation_artifact=data_validation_artifact,
                                                                     model_trainer_artifact=model_trainer_artifact)
-
-
         ti.xcom_push('model_evaluation_artifact', model_evaluation_artifact.to_dict())
 
     def push_model(**kwargs):
@@ -118,10 +116,6 @@ with DAG(
             print("Trained model rejected.")
             print("Trained model rejected.")
         print("Training pipeline completed")
-
-
-
-
 
     data_ingestion = PythonOperator(
         task_id='data_ingestion',
@@ -164,3 +158,4 @@ with DAG(
     )
 
     data_ingestion >> data_validation >> data_transformation >> model_trainer >> model_evaluation >> push_model
+
