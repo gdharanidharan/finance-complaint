@@ -21,7 +21,7 @@ jobs:
       - image: google/cloud-sdk
     resource_class: medium
     environment:
-      REPOSITORY: finance-complaint
+      REPOSITORY: finance-complaint-registry
       IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
     steps:
@@ -53,7 +53,7 @@ jobs:
     machine: true
     resource_class: gdharanidharan/self-hosted
     environment:
-      REPOSITORY: finance-complaint
+      REPOSITORY: finance-complaint-registry
       GAR_IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
