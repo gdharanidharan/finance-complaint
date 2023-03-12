@@ -21,7 +21,7 @@ jobs:
       - image: google/cloud-sdk
     resource_class: medium
     environment:
-      REPOSITORY: finance-complaint-registry
+      REPOSITORY: finance-complaint
       IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
     steps:
@@ -32,7 +32,6 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-
       - setup_remote_docker:
           version: 20.10.14
           docker_layer_caching: true
@@ -47,13 +46,13 @@ jobs:
       
       - run:
           name: push to private repository
-          command: docker push $GOOGLE_COMPUTE_ZONE-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY
+          command: docker push $GOOGLE_COMPUTE_ZONE-docker.pkg.dev/${GOOGLE_PROJECT_ID}/$REPOSITORY/$IMAGE_NAME:$IMAGE_TAG 
 
   continuous-deployment:
     machine: true
     resource_class: gdharanidharan/self-hosted
     environment:
-      REPOSITORY: finance-complaint-registry
+      REPOSITORY: finance-complaint
       GAR_IMAGE_NAME: finance-complaint
       IMAGE_TAG: latest
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
@@ -69,7 +68,6 @@ jobs:
             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
             gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-
       - run: 
           name: configure docker login
           command: gcloud auth configure-docker $GOOGLE_COMPUTE_ZONE-docker.pkg.dev
@@ -105,4 +103,3 @@ workflows:
             - sanity-check
             - continuous-integration
             - continuous-delivery
-            
